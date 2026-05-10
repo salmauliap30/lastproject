@@ -153,43 +153,33 @@ https://www.tooplate.com/view/2097-pop
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-12">
-                                                        <!-- TEMPEL KODE INI UNTUK MENGGANTIKAN FORM LAMA -->
-                                                        <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
-    
-                                                         <!-- Ganti VALUE di bawah dengan Access Key dari web3forms.com -->
-                                                         <input type="hidden" name="access_key" value="MASUKKAN-KEY-KAMU-DI-SINI">
+                                                  <div class="col-12">
+                                                    <!-- FORM YANG SUDAH DIBERSIHKAN -->
+                                                    <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+            
+                                                      <!-- JANGAN LUPA: Ganti value di bawah dengan Key dari emailmu -->
+                                                      <input type="hidden" name="access_key" value="MASUKKAN-KEY-KAMU-DI-SINI">
 
-                                               <div class="row">
-                                                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                    <input type="text" id="contact_name" name="name" class="form-control" placeholder="Nama" required/>
-                                                 </div>
-                                                 <div class="form-group col-md-6 col-lg-6 col-xl-6 tm-col-email">
-                                                   <input type="email" id="contact_email" name="email" class="form-control" placeholder="Email" required/>
+                                                      <div class="row">
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                          <input type="text" id="contact_name" name="name" class="form-control" placeholder="Nama" required/>
+                                                        </div>
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6 tm-col-email">
+                                                          <input type="email" id="contact_email" name="email" class="form-control" placeholder="Email" required/>
+                                                        </div>
+                                                      </div>                                                        
+                                                      <div class="form-group">
+                                                        <textarea id="contact_message" name="message" class="form-control" rows="9" placeholder="Pesan" required></textarea>
+                                                      </div>
+
+                                                      <!-- Mengarahkan ke halaman sukses agar tidak bingung -->
+                                                      <input type="hidden" name="redirect" value="https://web3forms.com/success">
+
+                                                      <button type="submit" class="btn btn-primary tm-btn-submit">Kirim</button>
+                                                    </form>
+                                                  </div>
                                                 </div>
-                                              </div>                                                        
-                                              <div class="form-group">
-                                                <textarea id="contact_message" name="message" class="form-control" rows="9" placeholder="Pesan" required></textarea>
-                                              </div>
 
-                                              <!-- Opsi: Ini agar setelah kirim, user otomatis balik ke web kamu lagi -->
-                                              <input type="hidden" name="redirect" value="https://web3forms.com/success">
-
-                                              <button type="submit" class="btn btn-primary tm-btn-submit">Kirim</button>
-                                              </form>
-
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 tm-col-email">
-                                                                  <input type="email" id="contact_email" name="contact_email" class="form-control" placeholder="Email"  required/>
-                                                                </div>
-                                                            </div>                                                        
-                                                            <div class="form-group">
-                                                              <textarea id="contact_message" name="contact_message" class="form-control" rows="9" placeholder="Pesan" required></textarea>
-                                                            </div>
-                                                            <button type="submit" class="btn btn-primary tm-btn-submit">Kirim</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
                                             </div>                                            
                                         </div>
                                     </div>
