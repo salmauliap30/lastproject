@@ -144,9 +144,10 @@
     <script src="js/anime.min.js"></script>
     <script src="js/main.js"></script>
 
-    <script type="module">
+        <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-      import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+      // TAMBAHKAN signInWithEmailAndPassword DI SINI
+      import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
       const firebaseConfig = {
         apiKey: "AIzaSyCEffkw1bYvWQPOEEgaFuOmGIgo3md-pAo",
@@ -160,20 +161,69 @@
       const app = initializeApp(firebaseConfig);
       const auth = getAuth(app);
 
+      // --- FUNGSI LOGIN USERNAME ---
+      window.loginUser = async function() {
+          const userValue = document.getElementById('username').value;
+          const passwordValue = document.getElementById('password').value;
+          
+          if(!userValue || !passwordValue) {
+              alert("Isi username dan password dulu ya!");
+              return;
+          }
+
+          const fakeEmail = userValue + "@callisall.com";
+
+          try {
+              await signInWithEmailAndPassword(auth, fakeEmail, passwordValue);
+              alert("Login Berhasil!");
+              window.location.reload(); // Refresh halaman setelah login
+          } catch (error) {
+              alert("Login Gagal: Username atau Password salah.");
+              console.error(error);
+          }
+      }
+
       // Cek status login untuk form pesan
       onAuthStateChanged(auth, (user) => {
           const formPesan = document.querySelector('.contact-form');
           if (!user && formPesan) {
               formPesan.innerHTML = `
                 <div style="text-align: center; padding: 30px; border: 1px solid white; border-radius: 10px; background: rgba(0,0,0,0.3);">
-                  <p style="color: white; margin-bottom: 15px;">Maaf, kamu harus login terlebih dahulu untuk bisa memesan karya.</p>
-                  <a href="login.html" class="btn btn-outline-light">Klik untuk Login</a>
+                  <p style="color: white; margin-bottom: 15px;">Halo! Silakan login pakai username kamu untuk memesan karya.</p>
+                  
+                  <div class="form-group">
+                      <input type="text" id="username" class="form-control" placeholder="Username" required/>
+                  </div>
+                  <div class="form-group" style="position: relative;">
+                      <input type="password" id="password" class="form-control" placeholder="Password" required/>
+                      <span id="togglePassword" style="position: absolute; right: 10px; top: 10px; cursor: pointer; color: white;">
+                          <i class="fas fa-eye" id="eyeIcon"></i>
+                      </span>
+                  </div>
+                  <button type="button" onclick="loginUser()" class="btn btn-primary">Masuk Sekarang</button>
                 </div>`;
+                
+              // Aktifkan fitur mata setelah form muncul
+              setupEyeIcon();
           }
       });
+
+      function setupEyeIcon() {
+          const togglePassword = document.querySelector('#togglePassword');
+          const password = document.querySelector('#password');
+          const eyeIcon = document.querySelector('#eyeIcon');
+          if(togglePassword) {
+              togglePassword.addEventListener('click', function () {
+                  const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                  password.setAttribute('type', type);
+                  eyeIcon.classList.toggle('fa-eye-slash');
+              });
+          }
+      }
     </script>
 
     <script>
+        // Script untuk layout footer
         function setupFooter() {
             var pageHeight = $('.tm-site-header-container').height() + $('footer').height() + 100;
             var main = $('.tm-main-content');
@@ -186,40 +236,6 @@
             $('.tm-current-year').text(new Date().getFullYear());
         });
     </script>
-    <script>
-    // Fitur Intip Password
-    const togglePassword = document.querySelector('#togglePassword');
-    const password = document.querySelector('#password');
-    const eyeIcon = document.querySelector('#eyeIcon');
-
-    togglePassword.addEventListener('click', function (e) {
-        // Toggle tipe input
-        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-        password.setAttribute('type', type);
-        // Toggle ikon
-        eyeIcon.classList.toggle('fa-eye-slash');
-    });
-
-    // Trik Login Username (Taruh di dalam fungsi login Firebase kamu)
-    async function loginUser() {
-        const userValue = document.getElementById('username').value;
-        const passwordValue = document.getElementById('password').value;
-        
-        // Manipulasi: Tambahkan domain palsu di belakang username secara otomatis
-        const fakeEmail = userValue + "@callisall.com";
-
-        try {
-            // Panggil Firebase login pakai fakeEmail tadi
-            await signInWithEmailAndPassword(auth, fakeEmail, passwordValue);
-            alert("Login Berhasil!");
-            window.location.href = "index.html";
-        } catch (error) {
-            alert("Login Gagal: " + error.message);
-        }
-    }
-
-    document.getElementById('btnLogin').addEventListener('click', loginUser);
-</script>
 
 
 </body>
