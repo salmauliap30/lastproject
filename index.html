@@ -53,25 +53,6 @@
                                     </div>
                                 </div>
 
-                                <div class="grid__item" id="team-link">
-                                    <div class="product">
-                                        <div class="tm-nav-link">
-                                            <i class="fas fa-users fa-3x tm-nav-icon"></i>
-                                            <span class="tm-nav-text">Pembelajaran</span>
-                                            <div class="product__bg"></div>            
-                                        </div>                                     
-                                        <div class="product__description">
-                                            <div class="p-sm-4 p-2">
-                                                <div class="row mb-3"><div class="col-12"><h2 class="tm-page-title">Musabaqah Khattil Qur'an</h2></div></div>
-                                                <div class="row tm-reverse-sm">
-                                                    <div class="col-sm-12 col-md-8"><p class="mb-4">Pembelajaran seni kaligrafi di lingkungan anak sekolah...</p></div>                                                
-                                                    <div class="col-sm-12 col-md-4"><img src="img/team.jpg" class="img-fluid"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div class="grid__item">
                                     <div class="product">
                                         <div class="tm-nav-link">
@@ -125,7 +106,7 @@
                     </div>
                 </div>                
             </div>
-            <footer><p class="small tm-copyright-text">Copyright &copy; <span class="tm-current-year">2026</span> CalliSall.</p></footer>
+            <footer><p class="small tm-copyright-text">Copyright &copy; 2026 CalliSall.</p></footer>
         </div>
     </div>
 
@@ -151,66 +132,40 @@
       const app = initializeApp(firebaseConfig);
       const auth = getAuth(app);
 
-      // Fungsi Login Global (Trik Username)
+      // Fungsi Login Username
       window.loginUser = async function() {
           const userVal = document.getElementById('username').value;
           const passVal = document.getElementById('password').value;
-          
-          if(!userVal || !passVal) { alert("Isi dulu dong username & passwordnya!"); return; }
-
           const fakeEmail = userVal + "@callisall.com";
           try {
               await signInWithEmailAndPassword(auth, fakeEmail, passVal);
-              alert("Yeay! Berhasil login.");
+              alert("Login Berhasil!");
               window.location.reload();
           } catch (e) {
-              alert("Yah, gagal. Cek lagi username/password kamu ya.");
+              alert("Gagal Login. Cek Username/Password!");
           }
       };
 
-      // Pantau status login untuk ganti tampilan form pesan
       onAuthStateChanged(auth, (user) => {
-          const container = document.getElementById('areaPesan');
           if (!user) {
-              container.innerHTML = `
-                <div style="text-align: center; padding: 20px; border: 1px solid rgba(255,255,255,0.5); border-radius: 10px;">
-                  <p style="color: white; margin-bottom: 20px;">Halo! Login dulu yuk pake Username buat pesen karya.</p>
-                  <div class="form-group"><input type="text" id="username" class="form-control" placeholder="Username" required/></div>
-                  <div class="form-group" style="position: relative;">
-                      <input type="password" id="password" class="form-control" placeholder="Password" required/>
-                      <span id="toggleEye" style="position: absolute; right: 15px; top: 12px; cursor: pointer; color: white; z-index: 99;">
-                          <i class="fas fa-eye" id="eyeIcon"></i>
-                      </span>
+              document.getElementById('areaPesan').innerHTML = `
+                <div style="text-align: center; border: 1px solid white; padding: 20px; border-radius: 10px;">
+                  <p style="color: white;">Login Username dulu ya untuk memesan.</p>
+                  <input type="text" id="username" class="form-control mb-2" placeholder="Username">
+                  <div style="position: relative;">
+                    <input type="password" id="password" class="form-control mb-2" placeholder="Password">
+                    <span id="btnEye" style="position: absolute; right: 10px; top: 10px; cursor: pointer; color: white;"><i class="fas fa-eye" id="eyeIcon"></i></span>
                   </div>
-                  <button type="button" onclick="loginUser()" class="btn btn-primary" style="width: 100%;">Masuk</button>
+                  <button type="button" onclick="loginUser()" class="btn btn-primary w-100">Login</button>
                 </div>`;
               
-              // Jalankan fitur intip password
-              const btnEye = document.getElementById('toggleEye');
-              const inputPass = document.getElementById('password');
-              const icon = document.getElementById('eyeIcon');
-              btnEye.onclick = () => {
-                  const isPass = inputPass.type === "password";
-                  inputPass.type = isPass ? "text" : "password";
-                  icon.classList.toggle('fa-eye-slash');
+              document.getElementById('btnEye').onclick = () => {
+                  const p = document.getElementById('password');
+                  p.type = p.type === "password" ? "text" : "password";
+                  document.getElementById('eyeIcon').classList.toggle('fa-eye-slash');
               };
           }
       });
     </script>
-
-    <script>
-        function setupFooter() {
-            var pageHeight = $('.tm-site-header-container').height() + $('footer').height() + 100;
-            var main = $('.tm-main-content');
-            if($(window).height() < pageHeight) { main.addClass('tm-footer-relative'); }
-            else { main.removeClass('tm-footer-relative'); }
-        }
-        $(function(){
-            setupFooter();
-            $(window).resize(setupFooter);
-            $('.tm-current-year').text(new Date().getFullYear());
-        });
-    </script>
 </body>
 </html>
-
