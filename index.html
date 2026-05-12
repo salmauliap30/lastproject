@@ -137,14 +137,11 @@
             <footer><p class="small tm-copyright-text">Copyright &copy; <span class="tm-current-year">2026</span> CalliSall.</p></footer>
         </div>
     </div>
-
     <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="slick/slick.min.js"></script>
     <script src="js/anime.min.js"></script>
     <script src="js/main.js"></script>
-
-<script src="js/bootstrap.min.js"></script>
-
 
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -162,17 +159,16 @@
       const app = initializeApp(firebaseConfig);
       const auth = getAuth(app);
 
-      document.addEventListener("DOMContentLoaded", function() {
+      // Cek status login untuk form pesan
+      onAuthStateChanged(auth, (user) => {
           const formPesan = document.querySelector('.contact-form');
-          onAuthStateChanged(auth, (user) => {
-            if (!user && formPesan) {
-                formPesan.innerHTML = `
-                  <div style="text-align: center; padding: 30px; border: 1px solid white; border-radius: 10px; background: rgba(0,0,0,0.3);">
-                    <p style="color: white; margin-bottom: 15px;">Maaf, kamu harus login terlebih dahulu untuk bisa memesan karya.</p>
-                    <a href="login/" class="btn btn-outline-light">Klik untuk Login</a>
-                  </div>`;
-            }
-          });
+          if (!user && formPesan) {
+              formPesan.innerHTML = `
+                <div style="text-align: center; padding: 30px; border: 1px solid white; border-radius: 10px; background: rgba(0,0,0,0.3);">
+                  <p style="color: white; margin-bottom: 15px;">Maaf, kamu harus login terlebih dahulu untuk bisa memesan karya.</p>
+                  <a href="login.html" class="btn btn-outline-light">Klik untuk Login</a>
+                </div>`;
+          }
       });
     </script>
 
@@ -189,5 +185,7 @@
             $('.tm-current-year').text(new Date().getFullYear());
         });
     </script>
+
+
 </body>
 </html>
