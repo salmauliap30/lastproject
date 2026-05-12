@@ -252,6 +252,40 @@ https://www.tooplate.com/view/2097-pop
         });
 
     </script>             
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+      import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+      // 1. Ambil kode ini dari Firebase kamu (yang tadi kamu screenshot)
+      const firebaseConfig = {
+        apiKey: "MASUKKAN_API_KEY_KAMU",
+        authDomain: "callisall-xxx.firebaseapp.com",
+        projectId: "callisall-xxx",
+        storageBucket: "callisall-xxx.appspot.com",
+        messagingSenderId: "123456789",
+        appId: "1:123456789:web:abcdef"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+
+      // 2. Logika buat ngecek: "Eh, kamu udah login belum?"
+      document.addEventListener("DOMContentLoaded", function() {
+          const formPesan = document.querySelector('.contact-form');
+          
+          onAuthStateChanged(auth, (user) => {
+            if (!user && formPesan) {
+                // Kalau BELUM login, form pesanan kita ganti jadi tulisan peringatan
+                formPesan.innerHTML = `
+                  <div style="text-align: center; padding: 30px; border: 1px solid white; border-radius: 10px;">
+                    <p>Maaf, login dulu ya buat bisa pesan karya Salma.</p>
+                    <a href="login/" class="btn btn-outline-light">Klik buat Login</a>
+                  </div>
+                `;
+            }
+          });
+      });
+    </script>
 
 </body>
 </html>
