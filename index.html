@@ -216,41 +216,51 @@ https://www.tooplate.com/view/2097-pop
     <script src="js/anime.min.js"></script>
     <script src="js/main.js"></script>
 
-    <script>      
-        function setupFooter() {
-            var pageHeight = $('.tm-site-header-container').height() + $('footer').height() + 100;
-            var main = $('.tm-main-content');
-            if($(window).height() < pageHeight) {
-                main.addClass('tm-footer-relative');
-            } else {
-                main.removeClass('tm-footer-relative');   
-            }
-        }
-
-        // --- FUNGSI LOGOUT ---
+    <script>
+        // --- 1. Fungsi Logout (Ditaruh di paling atas agar bisa dipanggil tombol) ---
         function doLogout() {
             localStorage.removeItem('isLoggedIn');
             alert("Kamu telah logout!");
-            location.reload(); 
+            window.location.href = window.location.pathname; // Reload ke halaman yang sama
+        }
+
+        // --- 2. Fungsi Cek Status (Untuk mengatur tombol) ---
+        function checkAuthStatus() {
+            const loginBtn = document.getElementById('login-btn');
+            const logoutBtn = document.getElementById('logout-btn');
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+            if (isLoggedIn) {
+                if(loginBtn) loginBtn.style.setProperty('display', 'none', 'important');
+                if(logoutBtn) logoutBtn.style.setProperty('display', 'inline-block', 'important');
+            } else {
+                if(loginBtn) loginBtn.style.setProperty('display', 'inline-block', 'important');
+                if(logoutBtn) logoutBtn.style.setProperty('display', 'none', 'important');
+            }
         }
 
         /* DOM is ready */
         $(function(){
+            // Langsung cek status saat halaman dimuat
+            checkAuthStatus();
+
+            // Setup footer bawaan template
+            function setupFooter() {
+                var pageHeight = $('.tm-site-header-container').height() + $('footer').height() + 100;
+                var main = $('.tm-main-content');
+                if($(window).height() < pageHeight) {
+                    main.addClass('tm-footer-relative');
+                } else {
+                    main.removeClass('tm-footer-relative');   
+                }
+            }
             setupFooter();
-            $(window).resize(function(){
-                setupFooter();
-            });
+            $(window).resize(setupFooter);
 
             // Update tahun otomatis
             $('.tm-current-year').text(new Date().getFullYear());
 
-            // --- CEK STATUS LOGIN ---
-            if (localStorage.getItem('isLoggedIn') === 'true') {
-                if(document.getElementById('login-btn')) document.getElementById('login-btn').style.display = 'none';
-                if(document.getElementById('logout-btn')) document.getElementById('logout-btn').style.display = 'inline-block';
-            }
-
-            // --- KODE PROTEKSI PESANAN (SATUPAM) ---
+            // --- KODE PROTEKSI PESANAN ---
             const orderForm = document.getElementById('orderForm');
             if(orderForm) {
                 orderForm.addEventListener('submit', function(e) {
@@ -265,3 +275,4 @@ https://www.tooplate.com/view/2097-pop
     </script>
 </body>
 </html>
+
