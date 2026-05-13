@@ -9,7 +9,6 @@
             margin: 0;
             padding: 0;
             font-family: 'Open Sans', sans-serif;
-            /* Warna gradient disamakan dengan background utama */
             background: linear-gradient(135deg, #7042f4 0%, #d43afb 100%);
             height: 100vh;
             display: flex;
@@ -18,7 +17,7 @@
         }
 
         .login-container {
-            background: rgba(0, 0, 0, 0.6); /* Transparan gelap agar elegan */
+            background: rgba(0, 0, 0, 0.6);
             padding: 40px;
             border-radius: 15px;
             box-shadow: 0 15px 25px rgba(0,0,0,.5);
@@ -56,7 +55,7 @@
         button {
             width: 100%;
             padding: 12px;
-            background: #d43afb; /* Warna pink/ungu senada */
+            background: #d43afb;
             border: none;
             border-radius: 5px;
             color: white;
@@ -82,7 +81,7 @@
 <body>
 
     <div class="login-container">
-        <h2>Masuk CalliSall</h2>
+        <h2 id="login-title">Masuk CalliSall</h2>
         
         <div class="input-group">
             <input type="text" id="username" placeholder="Username" required>
@@ -92,22 +91,31 @@
             <input type="password" id="password" placeholder="Password" required>
         </div>
 
-        <button onclick="handleLogin(// Tambahkan baris ini di dalam fungsi handleLogin() di halaman login:
-localStorage.setItem('everLoggedIn', 'true'); // Menandai pengguna lama
-localStorage.setItem('isLoggedIn', 'true');
-)">Sign In</button>
+        <button onclick="handleLogin()" id="btn-text">Login</button>
         
         <a href="../index.html" class="back-link">← Kembali ke Beranda</a>
     </div>
 
     <script>
+        // Cek saat halaman dimuat: kalau user lama, ganti teks tombol & judul
+        window.onload = function() {
+            if (localStorage.getItem('everLoggedIn') === 'true') {
+                document.getElementById('btn-text').innerText = "Sign In";
+                document.getElementById('login-title').innerText = "Sign In CalliSall";
+            }
+        };
+
         function handleLogin() {
             const user = document.getElementById('username').value;
             const pass = document.getElementById('password').value;
 
-            // Kita buat simple: asal diisi, login berhasil
             if(user.length > 0 && pass.length > 0) {
+                // SIMPAN TANDA LOGIN
                 localStorage.setItem('isLoggedIn', 'true');
+                
+                // SIMPAN TANDA USER LAMA (Agar nanti tombol jadi 'Sign In')
+                localStorage.setItem('everLoggedIn', 'true');
+
                 alert("Selamat datang kembali, " + user + "!");
                 window.location.href = "../index.html"; 
             } else {
@@ -117,4 +125,3 @@ localStorage.setItem('isLoggedIn', 'true');
     </script>
 </body>
 </html>
-
