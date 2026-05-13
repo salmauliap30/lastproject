@@ -92,7 +92,10 @@
             <input type="password" id="password" placeholder="Password" required>
         </div>
 
-        <button onclick="handleLogin()">Sign In</button>
+        <button onclick="handleLogin(// Tambahkan baris ini di dalam fungsi handleLogin() di halaman login:
+localStorage.setItem('everLoggedIn', 'true'); // Menandai pengguna lama
+localStorage.setItem('isLoggedIn', 'true');
+)">Sign In</button>
         
         <a href="../index.html" class="back-link">← Kembali ke Beranda</a>
     </div>
