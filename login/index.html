@@ -2,31 +2,113 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login CalliSall</title>
-    <!-- Tambahkan CSS agar rapi -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - CalliSall</title>
     <style>
-        body { display: flex; justify-content: center; align-items: center; height: 100vh; background: #555; font-family: sans-serif; }
-        .login-box { background: white; padding: 30px; border-radius: 10px; width: 300px; text-align: center; }
-        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; box-sizing: border-box; }
-        button { width: 100%; padding: 10px; background: #007bff; color: white; border: none; cursor: pointer; }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Open Sans', sans-serif;
+            /* Warna gradient disamakan dengan background utama */
+            background: linear-gradient(135deg, #7042f4 0%, #d43afb 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            background: rgba(0, 0, 0, 0.6); /* Transparan gelap agar elegan */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 25px rgba(0,0,0,.5);
+            width: 320px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        h2 {
+            color: #fff;
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 5px;
+            color: white;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #d43afb; /* Warna pink/ungu senada */
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #7042f4;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 13px;
+        }
     </style>
 </head>
 <body>
-    <div class="login-box">
-        <h3>Login CalliSall</h3>
-        <input type="text" id="username" placeholder="Masukkan Nama (Tanpa Email)">
-        <button onclick="doLogin()">Masuk</button>
+
+    <div class="login-container">
+        <h2>Masuk CalliSall</h2>
+        
+        <div class="input-group">
+            <input type="text" id="username" placeholder="Username" required>
+        </div>
+        
+        <div class="input-group">
+            <input type="password" id="password" placeholder="Password" required>
+        </div>
+
+        <button onclick="handleLogin()">Sign In</button>
+        
+        <a href="../index.html" class="back-link">← Kembali ke Beranda</a>
     </div>
 
     <script>
-        function doLogin() {
+        function handleLogin() {
             const user = document.getElementById('username').value;
-            if(user.length > 0) {
+            const pass = document.getElementById('password').value;
+
+            // Kita buat simple: asal diisi, login berhasil
+            if(user.length > 0 && pass.length > 0) {
                 localStorage.setItem('isLoggedIn', 'true');
-                alert("Berhasil Login!");
-                window.location.href = "../index.html"; // Kembali ke home
+                alert("Selamat datang kembali, " + user + "!");
+                window.location.href = "../index.html"; 
             } else {
-                alert("Nama tidak boleh kosong!");
+                alert("Isi username dan password dulu ya!");
             }
         }
     </script>
