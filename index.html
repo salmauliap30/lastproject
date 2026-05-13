@@ -200,18 +200,15 @@ https://www.tooplate.com/view/2097-pop
                 
 
             </footer>
-        </div> <!-- .tm-main-content -->  
-    </div>
-    <!-- load JS -->
-    <script src="js/jquery-3.2.1.slim.min.js"></script>         <!-- https://jquery.com/ -->    
-    <script src="slick/slick.min.js"></script>                  <!-- http://kenwheeler.github.io/slick/ -->  
-    <script src="js/anime.min.js"></script>                     <!-- http://animejs.com/ -->
-    <script src="js/main.js"></script>  
-    <script>      
 
+                <!-- load JS -->
+    <script src="js/jquery-3.2.1.slim.min.js"></script>
+    <script src="slick/slick.min.js"></script>
+    <script src="js/anime.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>      
         function setupFooter() {
             var pageHeight = $('.tm-site-header-container').height() + $('footer').height() + 100;
-
             var main = $('.tm-main-content');
 
             if($(window).height() < pageHeight) {
@@ -222,22 +219,33 @@ https://www.tooplate.com/view/2097-pop
             }
         }
 
-        /* DOM is ready
-        ------------------------------------------------*/
+        /* DOM is ready */
         $(function(){
-
             setupFooter();
 
             $(window).resize(function(){
                 setupFooter();
             });
 
-            $('.tm-current-year').text(new Date().getFullYear());  // Update year in copyright           
+            // Update tahun otomatis di footer
+            $('.tm-current-year').text(new Date().getFullYear());
+
+            // --- TAMBAHKAN KODE PROTEKSI LOGIN DI SINI ---
+            const orderForm = document.getElementById('orderForm');
+            if(orderForm) {
+                orderForm.addEventListener('submit', function(e) {
+                    // Cek apakah status login ada di penyimpanan browser
+                    if (localStorage.getItem('isLoggedIn') !== 'true') {
+                        e.preventDefault(); // Menghentikan pengiriman form ke Web3Forms
+                        alert("Waduh, kamu harus login dulu sebelum memesan karya!");
+                        window.location.href = "login/"; // Pindah ke halaman login
+                    }
+                });
+            }
+            // ---------------------------------------------
         });
-
-        
-
     </script>             
-
 </body>
 </html>
+
+        
