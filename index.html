@@ -195,13 +195,14 @@ https://www.tooplate.com/view/2097-pop
                     </div>
                 </div>                
             </div>
+                        <!-- ... baris sebelumnya ... -->
             <footer>
-                <p class="small tm-copyright-text">Copyright &copy; <span class="tm-current-year">2026</span> CalliSall. 
-                
-
+                <p class="small tm-copyright-text">Copyright &copy; <span class="tm-current-year">2026</span> CalliSall.</p>
             </footer>
+        </div> <!-- .tm-main-content -->  
+    </div> <!-- #tm-wrap -->
 
-                        <!-- load JS -->
+    <!-- load JS -->
     <script src="js/jquery-3.2.1.slim.min.js"></script>
     <script src="slick/slick.min.js"></script>
     <script src="js/anime.min.js"></script>
@@ -234,16 +235,15 @@ https://www.tooplate.com/view/2097-pop
             const orderForm = document.getElementById('orderForm');
             if(orderForm) {
                 orderForm.addEventListener('submit', function(e) {
-                    // Mengecek apakah status login bernilai 'true' di localStorage
                     if (localStorage.getItem('isLoggedIn') !== 'true') {
-                        e.preventDefault(); // Menghentikan pengiriman form ke Web3Forms
+                        e.preventDefault(); 
                         alert("Waduh, kamu harus login dulu sebelum memesan karya!");
-                        window.location.href = "login/"; // Mengarahkan ke folder login
+                        window.location.href = "login/"; 
                     }
                 });
             }
-            // ---------------------------------------
         });
     </script>             
 </body>
 </html>
+
