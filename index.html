@@ -210,6 +210,12 @@ https://www.tooplate.com/view/2097-pop
            </div> <!-- .tm-main-content -->  
           </div> <!-- #tm-wrap -->
 
+    <!-- load JS -->
+    <script src="js/jquery-3.2.1.slim.min.js"></script>
+    <script src="slick/slick.min.js"></script>
+    <script src="js/anime.min.js"></script>
+    <script src="js/main.js"></script>
+
     <script>      
         function setupFooter() {
             var pageHeight = $('.tm-site-header-container').height() + $('footer').height() + 100;
@@ -225,7 +231,7 @@ https://www.tooplate.com/view/2097-pop
         function doLogout() {
             localStorage.removeItem('isLoggedIn');
             alert("Kamu telah logout!");
-            location.reload(); // Refresh halaman agar tombol kembali jadi 'Login'
+            location.reload(); 
         }
 
         /* DOM is ready */
@@ -240,8 +246,8 @@ https://www.tooplate.com/view/2097-pop
 
             // --- CEK STATUS LOGIN ---
             if (localStorage.getItem('isLoggedIn') === 'true') {
-                document.getElementById('login-btn').style.display = 'none'; // Sembunyikan login
-                document.getElementById('logout-btn').style.display = 'inline-block'; // Tampilkan logout
+                if(document.getElementById('login-btn')) document.getElementById('login-btn').style.display = 'none';
+                if(document.getElementById('logout-btn')) document.getElementById('logout-btn').style.display = 'inline-block';
             }
 
             // --- KODE PROTEKSI PESANAN (SATUPAM) ---
@@ -257,8 +263,5 @@ https://www.tooplate.com/view/2097-pop
             }
         });
     </script>
-
-    
 </body>
 </html>
-
