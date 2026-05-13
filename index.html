@@ -159,6 +159,9 @@ https://www.tooplate.com/view/2097-pop
                                                 <div class="row">
                                                   <div class="col-12">
                                                     <!-- FORM YANG SUDAH DIBERSIHKAN -->
+                                                      <!-- Cari tag form pesanmu, tambahkan id -->
+                                                    <form id="orderForm" action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+
                                                     <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
             
                                                       <!-- JANGAN LUPA: Ganti value di bawah dengan Key dari emailmu -->
@@ -233,14 +236,7 @@ https://www.tooplate.com/view/2097-pop
             $('.tm-current-year').text(new Date().getFullYear());  // Update year in copyright           
         });
 
-        <!-- ... konten halaman pesanan kamu ... -->
-
-<script>
-    if (localStorage.getItem('isLoggedIn') !== 'true') {
-        alert("Waduh, kamu harus login dulu sebelum memesan!");
-        // Pastikan path href-nya benar sesuai lokasi file login kamu
-        window.location.href = "login/index.html"; 
-    }
+        
 
     </script>             
 
