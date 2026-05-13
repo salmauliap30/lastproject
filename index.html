@@ -201,7 +201,7 @@ https://www.tooplate.com/view/2097-pop
 
             </footer>
 
-                    <!-- load JS -->
+                        <!-- load JS -->
     <script src="js/jquery-3.2.1.slim.min.js"></script>
     <script src="slick/slick.min.js"></script>
     <script src="js/anime.min.js"></script>
@@ -210,37 +210,40 @@ https://www.tooplate.com/view/2097-pop
         function setupFooter() {
             var pageHeight = $('.tm-site-header-container').height() + $('footer').height() + 100;
             var main = $('.tm-main-content');
+
             if($(window).height() < pageHeight) {
                 main.addClass('tm-footer-relative');
-            } else {
+            }
+            else {
                 main.removeClass('tm-footer-relative');   
             }
         }
 
+        /* DOM is ready */
         $(function(){
             setupFooter();
+
             $(window).resize(function(){
                 setupFooter();
             });
 
+            // Update tahun otomatis di footer
             $('.tm-current-year').text(new Date().getFullYear());
 
-            // --- KODE PROTEKSI PESANAN ---
+            // --- KODE PROTEKSI PESANAN (SATUPAM) ---
             const orderForm = document.getElementById('orderForm');
             if(orderForm) {
                 orderForm.addEventListener('submit', function(e) {
-                    // Mengecek apakah kunci 'isLoggedIn' bernilai true di memori browser
+                    // Mengecek apakah status login bernilai 'true' di localStorage
                     if (localStorage.getItem('isLoggedIn') !== 'true') {
-                        e.preventDefault(); // Menggagalkan pengiriman form
+                        e.preventDefault(); // Menghentikan pengiriman form ke Web3Forms
                         alert("Waduh, kamu harus login dulu sebelum memesan karya!");
                         window.location.href = "login/"; // Mengarahkan ke folder login
                     }
                 });
             }
+            // ---------------------------------------
         });
     </script>             
 </body>
 </html>
-
-
-        
