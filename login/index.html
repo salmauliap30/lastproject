@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - CalliSall</title>
+    <!-- Font Awesome untuk ikon mata -->
+    <link rel="stylesheet" href="../fontawesome/css/fontawesome-all.min.css">
     <style>
         body {
             margin: 0;
@@ -14,94 +16,145 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            color: white;
         }
 
-        .login-container {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 15px 25px rgba(0,0,0,.5);
-            width: 320px;
+        .login-wrapper {
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.1);
+            width: 350px;
         }
 
-        h2 {
-            color: #fff;
-            margin-bottom: 30px;
-            font-weight: 300;
-            letter-spacing: 2px;
-        }
-
-        .input-group {
+        /* Judul besar di luar kotak sesuai gambar 24174.png */
+        .main-title {
+            font-size: 2.5rem;
             margin-bottom: 20px;
+            font-weight: 300;
+            letter-spacing: 3px;
+        }
+
+        /* Kotak besar (border biru di gambar) */
+        .login-box-container {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.5); /* Sesuai kotak di gambar */
+            padding: 30px 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 15px;
         }
 
         input {
             width: 100%;
             padding: 12px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid white; /* Border putih tegas sesuai coretan */
             border-radius: 5px;
             color: white;
             outline: none;
             box-sizing: border-box;
+            font-size: 16px;
         }
 
-        input::placeholder {
-            color: rgba(255,255,255,0.7);
+        /* Ikon mata di dalam password */
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            opacity: 0.7;
         }
 
         button {
             width: 100%;
             padding: 12px;
-            background: #d43afb;
-            border: none;
+            background: transparent;
+            border: 1px solid white; /* Tombol border putih sesuai gambar */
             border-radius: 5px;
             color: white;
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
             transition: 0.3s;
             margin-top: 10px;
         }
 
         button:hover {
-            background: #7042f4;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Teks "Sudah Punya Akun?" di luar kotak */
+        .alt-action {
+            margin-top: 15px;
+            font-size: 1.1rem;
+        }
+
+        .alt-action a {
+            color: white;
+            text-decoration: underline;
+            font-weight: bold;
         }
 
         .back-link {
             display: block;
-            margin-top: 20px;
-            color: rgba(255,255,255,0.6);
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
-            font-size: 13px;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
 
-    <div class="login-container">
-        <h2 id="login-title">Masuk CalliSall</h2>
+    <div class="login-wrapper">
+        <h1 class="main-title" id="login-title">LOGIN CalliSall</h1>
         
-        <div class="input-group">
-            <input type="text" id="username" placeholder="Username" required>
-        </div>
-        
-        <div class="input-group">
-            <input type="password" id="password" placeholder="Password" required>
+        <!-- Kotak pembungkus sesuai gambar -->
+        <div class="login-box-container">
+            <div class="input-wrapper">
+                <input type="text" id="username" placeholder="Username" required>
+            </div>
+            
+            <div class="input-wrapper">
+                <input type="password" id="password" placeholder="Password" required>
+                <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+            </div>
+
+            <button onclick="handleLogin()" id="btn-text">Login</button>
         </div>
 
-        <button onclick="handleLogin()" id="btn-text">Login</button>
+        <!-- Bagian Masuk sesuai gambar 24174.png -->
+        <div class="alt-action">
+            Sudah Punya Akun? <a href="#" onclick="switchToSignIn()">Masuk</a>
+        </div>
         
-        <a href="../index.html" class="back-link">← Kembali ke Beranda</a>
+        <a href="../index.html" class="back-link">← kembali ke Beranda</a>
     </div>
 
     <script>
-        // Cek saat halaman dimuat: kalau user lama, ganti teks tombol & judul
+        // Fungsi Mata Password
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#password');
+
+        togglePassword.addEventListener('click', function () {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        // Fungsi Ganti Teks (Switch ke Sign In)
+        function switchToSignIn() {
+            document.getElementById('login-title').innerText = "SIGN IN CalliSall";
+            document.getElementById('btn-text').innerText = "Sign In";
+            localStorage.setItem('everLoggedIn', 'true'); // Simulasi user lama
+        }
+
+        // Cek status saat load
         window.onload = function() {
             if (localStorage.getItem('everLoggedIn') === 'true') {
-                document.getElementById('btn-text').innerText = "Sign In";
-                document.getElementById('login-title').innerText = "Sign In CalliSall";
+                switchToSignIn();
             }
         };
 
@@ -110,18 +163,15 @@
             const pass = document.getElementById('password').value;
 
             if(user.length > 0 && pass.length > 0) {
-                // SIMPAN TANDA LOGIN
                 localStorage.setItem('isLoggedIn', 'true');
-                
-                // SIMPAN TANDA USER LAMA (Agar nanti tombol jadi 'Sign In')
                 localStorage.setItem('everLoggedIn', 'true');
-
-                alert("Selamat datang kembali, " + user + "!");
+                alert("Selamat datang, " + user + "!");
                 window.location.href = "../index.html"; 
             } else {
-                alert("Isi username dan password dulu ya!");
+                alert("Isi dulu ya!");
             }
         }
     </script>
 </body>
 </html>
+
