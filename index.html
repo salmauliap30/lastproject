@@ -204,11 +204,13 @@ https://www.tooplate.com/view/2097-pop
                 </div>                
             </div>
                         <!-- ... baris sebelumnya ... -->
-            <footer>
+                        <footer>
                 <p class="small tm-copyright-text">Copyright &copy; <span class="tm-current-year">2026</span> CalliSall.</p>
             </footer>
-           </div> <!-- .tm-main-content -->  
-          </div> <!-- #tm-wrap -->
+        </div> </div> <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/anime.min.js"></script>
+    <script src="slick/slick.min.js"></script>
+    <script src="js/tooplate-script.js"></script>
 
     <script>      
         function setupFooter() {
@@ -228,23 +230,25 @@ https://www.tooplate.com/view/2097-pop
             location.reload(); // Refresh halaman agar tombol kembali jadi 'Login'
         }
 
-        /* DOM is ready */
+        /* Jika DOM/Halaman sudah siap */
         $(function(){
             setupFooter();
             $(window).resize(function(){
                 setupFooter();
             });
 
-            // Update tahun otomatis
+            // Update tahun otomatis di footer
             $('.tm-current-year').text(new Date().getFullYear());
 
             // --- CEK STATUS LOGIN ---
             if (localStorage.getItem('isLoggedIn') === 'true') {
-                document.getElementById('login-btn').style.display = 'none'; // Sembunyikan login
-                document.getElementById('logout-btn').style.display = 'inline-block'; // Tampilkan logout
+                var loginBtn = document.getElementById('login-btn');
+                var logoutBtn = document.getElementById('logout-btn');
+                if(loginBtn) loginBtn.style.display = 'none'; 
+                if(logoutBtn) logoutBtn.style.display = 'inline-block'; 
             }
 
-            // --- KODE PROTEKSI PESANAN (SATUPAM) ---
+            // --- KODE PROTEKSI PESANAN ---
             const orderForm = document.getElementById('orderForm');
             if(orderForm) {
                 orderForm.addEventListener('submit', function(e) {
@@ -256,19 +260,6 @@ https://www.tooplate.com/view/2097-pop
                 });
             }
         });
-
-           </div> </div> <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/anime.min.js"></script>
-    <script src="slick/slick.min.js"></script>
-    <script src="js/tooplate-script.js"></script>
-
-    <script>      
-        function setupFooter() {
-            var pageHeight = $('.tm-site-header-container').height() + $('footer').height() + 100;
-
-        
     </script>
-
-    
 </body>
 </html>
