@@ -161,7 +161,7 @@
                                                         <textarea id="contact_message" name="message" class="form-control" rows="9" placeholder="Pesan" required></textarea>
                                                       </div>
 
-                                                      <input type="hidden" name="redirect" value="https://web3forms.com/success">
+                                                                                                            <input type="hidden" name="redirect" value="https://web3forms.com/success">
                                                       <button type="submit" class="btn btn-primary tm-btn-submit">Kirim</button>
                                                     </form>
                                                   </div>
@@ -172,9 +172,7 @@
                                 </div>
 
                             </div> </div> </div>
-                </div> </div> 
-                                    window.location.href = "login/"; 
-                                <footer>
+                </div> </div> <footer>
                 <p class="small tm-copyright-text">Copyright &copy; <span class="tm-current-year">2026</span> CalliSall.</p>
             </footer>
         </div> </div> <script src="js/jquery-3.2.1.min.js"></script>
@@ -193,20 +191,24 @@
             }
         }
 
+        // --- FUNGSI LOGOUT ---
         function doLogout() {
             localStorage.removeItem('isLoggedIn');
             alert("Kamu telah logout!");
             location.reload(); 
         }
 
+        /* Saat Halaman Siap */
         $(function(){
             setupFooter();
             $(window).resize(function(){
                 setupFooter();
             });
 
+            // Tahun otomatis
             $('.tm-current-year').text(new Date().getFullYear());
 
+            // --- CEK STATUS LOGIN ---
             if (localStorage.getItem('isLoggedIn') === 'true') {
                 var loginBtn = document.getElementById('login-btn');
                 var logoutBtn = document.getElementById('logout-btn');
@@ -214,6 +216,7 @@
                 if(logoutBtn) logoutBtn.style.display = 'inline-block'; 
             }
 
+            // --- KODE PROTEKSI PESANAN ---
             const orderForm = document.getElementById('orderForm');
             if(orderForm) {
                 orderForm.addEventListener('submit', function(e) {
