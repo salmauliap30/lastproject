@@ -159,13 +159,7 @@
         }
 
         // Cek status saat load
-        window.onload = function() {
-
-    // Kalau user pernah login sebelumnya
-    if (localStorage.getItem('everLoggedIn') === 'true') {
-
-        // Ubah tampilan jadi SIGN IN
-        switchToSignIn();
+        
 
         // Langsung masuk otomatis kalau masih login
         if(localStorage.getItem('isLoggedIn') === 'true'){
