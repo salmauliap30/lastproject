@@ -146,9 +146,16 @@
 
         // Fungsi Ganti Teks (Switch ke Sign In)
         function switchToSignIn() {
-            document.getElementById('login-title').innerText = "SIGN IN CalliSall";
-            document.getElementById('btn-text').innerText = "Sign In";
-            localStorage.setItem('everLoggedIn', 'true'); // Simulasi user lama
+
+    // Kalau belum pernah login
+    if(localStorage.getItem('everLoggedIn') !== 'true'){
+        alert("Kamu harus login dulu ya!");
+        return;
+    }
+
+    // Kalau sudah pernah login
+    document.getElementById('login-title').innerText = "SIGN IN CalliSall";
+    document.getElementById('btn-text').innerText = "Sign In";
         }
 
         // Cek status saat load
