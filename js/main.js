@@ -201,11 +201,21 @@
 			this.DOM.product.addEventListener('click', () => this.open());
 		}
 		open() {
-			DOM.details.fill(this.info);
-			DOM.details.open({
-				productBg: this.DOM.productBg
-			});
-		}
+       
+          // Cek apakah yang diklik adalah menu Pesan
+          const menuName = this.DOM.product.querySelector('.tm-nav-text').innerText;
+
+          if(menuName === "Pesan" && localStorage.getItem('isLoggedIn') !== 'true'){
+            alert("🔒 Kamu harus Login atau Sign In terlebih dahulu sebelum memesan karya.");
+            window.location.href = "login/index.html";
+            return;
+          }
+
+          DOM.details.fill(this.info);
+          DOM.details.open({
+            productBg: this.DOM.productBg
+          });
+    	}
 	}; // class Item
 
 	const DOM = {};
