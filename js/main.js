@@ -206,7 +206,7 @@
           const menuName = this.DOM.product.querySelector('.tm-nav-text').innerText;
 
           if(menuName === "Pesan" && localStorage.getItem('isLoggedIn') !== 'true'){
-            alert("🔒 Kamu harus Login atau Sign In terlebih dahulu sebelum memesan karya.");
+            alert("Kamu harus Login atau Sign In terlebih dahulu sebelum memesan!");
             window.location.href = "login/index.html";
             return;
           }
