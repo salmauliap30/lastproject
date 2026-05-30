@@ -208,7 +208,20 @@
 
             // Update tahun otomatis
             $('.tm-current-year').text(new Date().getFullYear());
+            // Kunci menu Pesan jika belum login
+           if(localStorage.getItem('isLoggedIn') !== 'true'){
 
+              $('#contact_name, #contact_email, #contact_message').prop('disabled', true);
+
+              $('.tm-btn-submit').click(function(e){
+                e.preventDefault();
+
+                alert('🔒 Kamu harus Login atau Sign In terlebih dahulu sebelum memesan karya.');
+
+                window.location.href = './login/index.html';
+              });
+
+            }
             // --- CEK STATUS LOGIN ---
             if (localStorage.getItem('isLoggedIn') === 'true') {
                 var loginBtn = document.getElementById('login-btn');
