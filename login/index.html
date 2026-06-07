@@ -298,7 +298,15 @@ function getUsers() {
           }
 
           // MODE LOGIN
-          let users = JSON.parse(localStorage.getItem("users")) || [];
+          let users;
+
+try {
+  const raw = localStorage.getItem("users");
+  users = raw ? JSON.parse(raw) : [];
+  if (!Array.isArray(users)) users = [];
+} catch (e) {
+  users = [];
+}
 
           let found = users.find(
             u => u.username === user && u.password === pass
