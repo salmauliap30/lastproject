@@ -130,6 +130,10 @@
                 <i class="fas fa-eye-slash toggle-password" id="togglePassword"></i>
             </div>
 
+            <div class="input-wrapper" id="email-wrapper" style="display:none;">
+              <input type="email" id="email" placeholder="Email">
+            </div>
+            
             <button onclick="handleLogin()" id="btn-text">Login</button>
         </div>
 
@@ -166,22 +170,15 @@
     }
 
 });
-        <div class="input-wrapper" id="email-wrapper" style="display:none;">
-          <input type="email" id="email" placeholder="Email">
-        </div>
+        
 
-        // Fungsi Ganti Teks (Switch ke Sign In)
         function switchToSignIn() {
 
-    // Kalau belum pernah login
-    if(localStorage.getItem('everLoggedIn') !== 'true'){
-        alert("Kamu harus login dulu ya!");
-        return;
-    }
+          document.getElementById('login-title').innerText = "REGISTER CalliSall";
 
-    // Kalau sudah pernah login
-    document.getElementById('login-title').innerText = "SIGN IN CalliSall";
-    document.getElementById('btn-text').innerText = "Sign In";
+          document.getElementById('btn-text').innerText = "Register";
+
+          document.getElementById('email-wrapper').style.display = "block";
         }
 
         // Cek status saat load
