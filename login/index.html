@@ -238,13 +238,7 @@
         // Cek status saat load
         
 
-        if(document.getElementById('btn-text').innerText === "Register"){
-
-          localStorage.setItem("savedUser", user);
-          localStorage.setItem("savedPass", pass);
-          localStorage.setItem("savedEmail", emailField.value);
-
-        }
+        
         // Langsung masuk otomatis kalau masih login
         if(localStorage.getItem('isLoggedIn') === 'true'){
             window.location.href = "../index.html";
@@ -253,27 +247,51 @@
 
 
         function handleLogin() {
-          const user = document.getElementById('username').value;
-          const pass = document.getElementById('password').value;
-          const emailField = document.getElementById('email');
 
-          if(user.length > 0 && pass.length > 0) {
+         const user = document.getElementById('username').value;
+         const pass = document.getElementById('password').value;
+         const emailField = document.getElementById('email');
 
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('everLoggedIn', 'true');
+         if(user.length > 0 && pass.length > 0) {
 
-            if(document.getElementById('btn-text').innerText === "Sign In") {
-              alert("Selamat datang, " + user + "!");
-            } else {
-               alert("Selamat datang, " + user + "!");
-            }
+          // MODE REGISTER
+          if(document.getElementById('btn-text').innerText === "Register") {
 
-            window.location.href = "../index.html";
+           localStorage.setItem("savedUser", user);
+           localStorage.setItem("savedPass", pass);
+           localStorage.setItem("savedEmail", emailField.value);
+
+           alert("Registrasi berhasil!");
+
+           switchToLogin();
+
+           return;
+          }
+
+          // MODE LOGIN
+          if(
+           user === localStorage.getItem("savedUser") &&
+           pass === localStorage.getItem("savedPass")
+          ){
+
+           localStorage.setItem("isLoggedIn", "true");
+
+           alert("Selamat datang, " + user + "!");
+
+           window.location.href = "../index.html";
+
+          } else {
+
+            alert("Username atau password salah!");
+
+          }
 
          } else {
-         alert("Isi dulu ya!");
+
+          alert("Isi dulu ya!");
+
          }
-       }
+        }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
