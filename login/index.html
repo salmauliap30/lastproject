@@ -202,8 +202,12 @@
          })
          .catch(function(error){
 
-           console.log(error);
-           alert("Gagal mengirim email!");
+          console.log(error);
+
+          alert(
+           "Status: " + error.status +
+           "\nText: " + error.text
+          );
 
          });
         }
