@@ -175,6 +175,39 @@
 });
         
 
+        function forgotPassword(){
+
+          const email = localStorage.getItem("savedEmail");
+          const username = localStorage.getItem("savedUser");
+          const password = localStorage.getItem("savedPass");
+
+          if(!email){
+            alert("Email belum terdaftar!");
+            return;
+          }
+
+          emailjs.send(
+            "service_el36h5i",
+            "template_yvz9q79",
+            {
+              username: username,
+              password: password,
+              email: email
+            }
+         )
+         .then(function(){
+
+           alert("Password berhasil dikirim ke emailmu!");
+
+         })
+         .catch(function(error){
+
+           console.log(error);
+           alert("Gagal mengirim email!");
+
+         });
+        }
+        
         function switchToSignIn(){
 
           document.getElementById('login-title').innerText = "REGISTER to CalliSall";
@@ -218,7 +251,7 @@
             localStorage.setItem('everLoggedIn', 'true');
 
             if(document.getElementById('btn-text').innerText === "Sign In") {
-              alert("Selamat datang kembali, " + user + "!");
+              alert("Selamat datang, " + user + "!");
             } else {
                alert("Selamat datang, " + user + "!");
             }
@@ -229,6 +262,12 @@
          alert("Isi dulu ya!");
          }
        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <script>
+
+    emailjs.init("o7qYU0fbDKWeu2Onq");
     </script>
 </body>
 </html>
