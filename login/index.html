@@ -133,9 +133,11 @@
             <button onclick="handleLogin()" id="btn-text">Login</button>
         </div>
 
+        <a href="#" onclick="forgotPassword()">Lupa Password?</a>
+        
         <!-- Bagian Masuk sesuai gambar 24174.png -->
-        <div class="alt-action">
-            Sudah Punya Akun? <a href="#" onclick="switchToSignIn()">Masuk</a>
+        <div class="alt-action" id="switch-text">
+          Belum Punya Akun? <a href="#" onclick="switchToSignIn()">Daftar</a>
         </div>
         
         <a href="../index.html" class="back-link">← kembali ke Beranda</a>
@@ -164,6 +166,9 @@
     }
 
 });
+        <div class="input-wrapper" id="email-wrapper" style="display:none;">
+          <input type="email" id="email" placeholder="Email">
+        </div>
 
         // Fungsi Ganti Teks (Switch ke Sign In)
         function switchToSignIn() {
