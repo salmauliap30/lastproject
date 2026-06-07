@@ -261,45 +261,43 @@
           // MODE REGISTER
           if(document.getElementById('btn-text').innerText.trim() === "Register") {
 
-           localStorage.setItem("savedUser", user);
-           localStorage.setItem("savedPass", pass);
-           localStorage.setItem("savedEmail", emailField.value);
+           let users = JSON.parse(localStorage.getItem("users")) || [];
 
-           alert(
-            "Data tersimpan:\n" +
-            user + "\n" +
-            pass + "\n" +
-            emailField.value
-           );
+           users.push({
+            username: user,
+            password: pass,
+            email: emailField.value
+          });
 
-           switchToLogin();
-           return;
+          localStorage.setItem("users", JSON.stringify(users));
+
+          alert("Registrasi berhasil!");
+
+          switchToLogin();
+          return;
           }
 
           // MODE LOGIN
-          if(
-           user === localStorage.getItem("savedUser") &&
-           pass === localStorage.getItem("savedPass")
-          ){
+          let users = JSON.parse(localStorage.getItem("users")) || [];
 
-           localStorage.setItem("isLoggedIn", "true");
+          let found = users.find(
+            u => u.username === user && u.password === pass
+          );
 
-           alert("Selamat datang, " + user + "!");
+         if(found){
 
-           window.location.href = "../index.html";
+          localStorage.setItem("isLoggedIn", "true");
 
-          } else {
+          alert("Selamat datang, " + user + "!");
 
-            alert("Username atau password salah!");
+          window.location.href = "../index.html";
 
-          }
+         }else{
 
-         } else {
+          alert("Username atau password salah!");
 
-          alert("Isi dulu ya!");
-
-         }
         }
+        
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
