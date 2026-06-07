@@ -175,15 +175,29 @@
 });
         
 
-        function switchToSignIn() {
+        function switchToSignIn(){
 
-          document.getElementById('login-title').innerText = "REGISTER CalliSall";
+          document.getElementById('login-title').innerText = "REGISTER to CalliSall";
 
           document.getElementById('btn-text').innerText = "Register";
 
           document.getElementById('email-wrapper').style.display = "block";
+
+          document.getElementById('switch-text').innerHTML =
+          'Sudah Punya Akun? <a href="#" onclick="switchToLogin()">Login</a>';
         }
 
+        function switchToLogin(){
+
+          document.getElementById('login-title').innerText = "LOGIN to CalliSall";
+
+          document.getElementById('btn-text').innerText = "Login";
+
+          document.getElementById('email-wrapper').style.display = "none";
+
+          document.getElementById('switch-text').innerHTML =
+          'Belum Punya Akun? <a href="#" onclick="switchToSignIn()">Daftar</a>';
+        }
         // Cek status saat load
         
 
