@@ -213,7 +213,8 @@
         }
         
         function switchToSignIn(){
-
+          mode = "register";
+            
           document.getElementById('login-title').innerText = "REGISTER to CalliSall";
 
           document.getElementById('btn-text').innerText = "Register";
@@ -227,7 +228,8 @@
         }
 
         function switchToLogin(){
-
+          mode = "login";
+            
           document.getElementById('login-title').innerText = "LOGIN to CalliSall";
 
           document.getElementById('btn-text').innerText = "Login";
@@ -259,7 +261,7 @@
          if(user.length > 0 && pass.length > 0) {
 
           // MODE REGISTER
-          if(document.getElementById('btn-text').innerText.trim() === "Register") {
+          if(mode === "register"){
 
            let users = JSON.parse(localStorage.getItem("users")) || [];
 
