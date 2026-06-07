@@ -137,7 +137,7 @@
             <button onclick="handleLogin()" id="btn-text">Login</button>
         </div>
 
-        <a href="#" onclick="forgotPassword()">Lupa Password?</a>
+        <a href="#" id="forgot-link" onclick="forgotPassword()">Lupa Password?</a>
         
         <!-- Bagian Masuk sesuai gambar 24174.png -->
         <div class="alt-action" id="switch-text">
@@ -218,6 +218,8 @@
 
           document.getElementById('switch-text').innerHTML =
           'Sudah Punya Akun? <a href="#" onclick="switchToLogin()">Login</a>';
+
+          document.getElementById('forgot-link').style.display = "none";
         }
 
         function switchToLogin(){
@@ -230,10 +232,19 @@
 
           document.getElementById('switch-text').innerHTML =
           'Belum Punya Akun? <a href="#" onclick="switchToSignIn()">Daftar</a>';
+
+          document.getElementById('forgot-link').style.display = "inline";
         }
         // Cek status saat load
         
 
+        if(document.getElementById('btn-text').innerText === "Register"){
+
+          localStorage.setItem("savedUser", user);
+          localStorage.setItem("savedPass", pass);
+          localStorage.setItem("savedEmail", emailField.value);
+
+        }
         // Langsung masuk otomatis kalau masih login
         if(localStorage.getItem('isLoggedIn') === 'true'){
             window.location.href = "../index.html";
@@ -244,6 +255,7 @@
         function handleLogin() {
           const user = document.getElementById('username').value;
           const pass = document.getElementById('password').value;
+          const emailField = document.getElementById('email');
 
           if(user.length > 0 && pass.length > 0) {
 
