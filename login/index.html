@@ -273,13 +273,22 @@
             users = [];
           }
 
-           users.push({
-            username: user,
-            password: pass,
-            email: emailField.value
-          });
+           let exists = users.find(u => u.username === user);
 
-          localStorage.setItem("users", JSON.stringify(users));
+           if (exists) {
+            alert("Username sudah dipakai");
+            return;
+          }
+
+          users.push({
+           username: user,
+           password: pass,
+           email: emailField.value
+         });
+
+         localStorage.setItem("users", JSON.stringify(users));
+
+          
 
           alert("Registrasi berhasil!");
 
