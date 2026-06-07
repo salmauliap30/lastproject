@@ -252,7 +252,15 @@
         }
     
 
-
+function getUsers() {
+  try {
+    const raw = localStorage.getItem("users");
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (e) {
+    return [];
+  }
+}
         function handleLogin() {
 
          const user = document.getElementById('username').value.trim();
@@ -264,14 +272,7 @@
           // MODE REGISTER
           if(mode === "register"){
 
-           let users;
-
-           try {
-            users = JSON.parse(localStorage.getItem("users"));
-            if (!Array.isArray(users)) users = [];
-          } catch (e) {
-            users = [];
-          }
+           let users = getUsers();
 
            let exists = users.find(u => u.username === user);
 
