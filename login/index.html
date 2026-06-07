@@ -264,7 +264,14 @@
           // MODE REGISTER
           if(mode === "register"){
 
-           let users = JSON.parse(localStorage.getItem("users")) || [];
+           let users;
+
+           try {
+            users = JSON.parse(localStorage.getItem("users"));
+            if (!Array.isArray(users)) users = [];
+          } catch (e) {
+            users = [];
+          }
 
            users.push({
             username: user,
