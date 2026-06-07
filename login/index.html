@@ -259,16 +259,20 @@
          if(user.length > 0 && pass.length > 0) {
 
           // MODE REGISTER
-          if(document.getElementById('btn-text').innerText === "Register") {
+          if(document.getElementById('btn-text').innerText.trim() === "Register") {
 
            localStorage.setItem("savedUser", user);
            localStorage.setItem("savedPass", pass);
            localStorage.setItem("savedEmail", emailField.value);
 
-           alert("Registrasi berhasil!");
+           alert(
+            "Data tersimpan:\n" +
+            user + "\n" +
+            pass + "\n" +
+            emailField.value
+           );
 
            switchToLogin();
-
            return;
           }
 
